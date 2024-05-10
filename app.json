@@ -1,0 +1,38 @@
+{
+    "expo": {
+        "scheme": "zoom-plus",
+        "name": "Zoom-plus",
+        "slug": "zoom-plus",
+        "version": "1.0.0",
+        "orientation": "portrait",
+        "icon": "./assets/images/icon.png",
+        "userInterfaceStyle": "automatic",
+        "splash": {
+            "image": "./assets/images/splash.png",
+            "resizeMode": "contain",
+            "backgroundColor": "#1BAC4B"
+        },
+        "assetBundlePatterns": ["**/*"],
+        "ios": {
+            "supportsTablet": true,
+            "bundleIdentifier": "com.kishangrowwork.zoomplus"
+        },
+        "android": {
+            "adaptiveIcon": {
+                "foregroundImage": "./assets/images/adaptive-icon.png",
+                "backgroundColor": "#1BAC4B"
+            },
+            "package": "com.kishangrowwork.zoomplus"
+        },
+        "web": {
+            "favicon": "./assets/images/favicon.png"
+        },
+        "plugins": ["expo-font", "@react-native-google-signin/google-signin"],
+        "extra": {
+            "eas": {
+                "projectId": "75aa0421-9fff-4c2f-a2c0-6430745b7c0e"
+            }
+        },
+        "owner": "kishan-growwork"
+    }
+}
