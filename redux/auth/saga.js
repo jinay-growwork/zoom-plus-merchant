@@ -18,6 +18,9 @@ export function* WATCH_SIGN_IN(action) {
         console.info('----------------------------')
         console.info('resp =>', resp)
         console.info('----------------------------')
+        if (resp?.data) {
+            action.payload.navigation.navigate('OTPVerification')
+        }
         yield put({
             type: actions.SET_AUTH_STATE,
             payload: { user: resp?.data?.otp },

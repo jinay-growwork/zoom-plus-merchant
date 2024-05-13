@@ -37,7 +37,7 @@ import GoogleLogin from '../components/Auth'
 const isTestMode = true
 // WebBrowser.maybeCompleteAuthSession()
 
-const Login = ({ navigation }) => {
+const LoginPage = ({ navigation }) => {
     // const [request, response, promptAsync] = Google.useAuthRequest({
     //     // redirectUri: 'http://localhost:8081/',
     //     androidClientId:
@@ -53,6 +53,7 @@ const Login = ({ navigation }) => {
     console.info('loading =>', loading)
     console.info('----------------------------')
     const [mobile, setMobile] = useState()
+    const [mobileError, setMobileError] = useState('')
     const auth = useSelector((state) => state.auth)
     console.info('----------------------------')
     console.info('auth =>', auth)
@@ -68,11 +69,28 @@ const Login = ({ navigation }) => {
 
     const dispatch = useDispatch()
     const handleLoginPress = () => {
-        // dispatch({
-        //     type: actions.SET_NUMBER,
-        //     payload: { mobileNumber: `${selectedArea.callingCode}${mobile}` },
-        // })
-        navigation.navigate('LoginPage')
+        let isValid = true
+
+        if (!mobile) {
+            setMobileError('Please enter Mobile Number')
+            isValid = false
+        } else if (mobile.length !== 10) {
+            setMobileError('Please enter a valid Mobile Number')
+            isValid = false
+        } else {
+            setMobileError('Please enter Mobile Number')
+        }
+
+        if (isValid) {
+            dispatch({
+                type: actions.SET_NUMBER,
+                payload: {
+                    mobileNumber: `${selectedArea.callingCode}${mobile}`,
+                    navigation: navigation,
+                },
+            })
+            navigation.navigate('OTPVerification')
+        }
     }
     function RenderAreasCodesModal() {
         const renderItem = ({ item }) => {
@@ -215,57 +233,120 @@ const Login = ({ navigation }) => {
                             },
                         ]}
                     >
-                        Login to Restaurant Partner
+                        Login to Your Account
                     </Text>
-
+                    <View
+                        style={[
+                            styles.inputContainer,
+                            {
+                                backgroundColor: dark
+                                    ? COLORS.dark2
+                                    : COLORS.greyscale500,
+                                borderColor: dark
+                                    ? COLORS.dark2
+                                    : COLORS.greyscale500,
+                            },
+                        ]}
+                    >
+                        <TouchableOpacity
+                            style={styles.selectFlagContainer}
+                            onPress={() => setModalVisible(true)}
+                        >
+                            <View style={{ justifyContent: 'center' }}>
+                                <Image
+                                    source={icons.down}
+                                    resizeMode="contain"
+                                    style={styles.downIcon}
+                                />
+                            </View>
+                            <View
+                                style={{
+                                    justifyContent: 'center',
+                                    marginLeft: 5,
+                                }}
+                            >
+                                <Image
+                                    source={{ uri: selectedArea?.flag }}
+                                    contentFit="contain"
+                                    style={styles.flagIcon}
+                                />
+                            </View>
+                            <View
+                                style={{
+                                    justifyContent: 'center',
+                                    marginLeft: 5,
+                                }}
+                            >
+                                <Text
+                                    style={{
+                                        color: dark ? COLORS.white : '#111',
+                                        fontSize: 12,
+                                    }}
+                                >
+                                    {selectedArea?.callingCode}
+                                </Text>
+                            </View>
+                        </TouchableOpacity>
+                        {/* Phone Number Text Input */}
+                        <TextInput
+                            value={mobile}
+                            style={[
+                                styles.input,
+                                {
+                                    color: dark ? COLORS.white : COLORS.black,
+                                },
+                            ]}
+                            placeholder="Enter your phone number"
+                            placeholderTextColor={COLORS.gray}
+                            selectionColor="#111"
+                            keyboardType="numeric"
+                            onChangeText={(value) => setMobile(value)}
+                        />
+                    </View>
+                    {mobileError ? (
+                        <Text style={{ color: 'red', textAlign: 'center' }}>
+                            {mobileError}
+                        </Text>
+                    ) : null}
+                    {RenderAreasCodesModal()}
                     <Button
                         title="Login"
                         filled
                         onPress={handleLoginPress}
                         style={styles.button}
                     />
-                    <View style={styles.bottomContainer}>
-                        <Text
-                            style={[
-                                styles.bottomLeft,
-                                {
-                                    color: dark ? COLORS.white : COLORS.black,
-                                },
-                            ]}
-                        >
-                            Don't have an account ?
+                    {/* <TouchableOpacity
+                        onPress={() =>
+                            navigation.navigate('ForgotPasswordMethods')
+                        }
+                    >
+                        <Text style={styles.forgotPasswordBtnText}>
+                            Forgot the password?
                         </Text>
-                        <TouchableOpacity
-                            onPress={() => navigation.navigate('Signup')}
-                        >
-                            <Button
-                                title="Register"
-                                filled
-                                onPress={handleLoginPress}
-                                style={styles.button}
-                            />
-                        </TouchableOpacity>
-                    </View>
-                    <View>
-                        <OrSeparator text="or continue with" />
-                        <View style={styles.socialBtnContainer}>
-                            <GoogleLogin
-                                navigation={navigation}
-                                loading={loading}
-                                setLoading={setLoading}
-                            />
-                            {/* <SocialButton
-                                icon={icons.google}
-                                // onPress={() => promptAsync()}
-                            /> */}
-                        </View>
-                    </View>
+                    </TouchableOpacity> */}
                 </ScrollView>
                 {loading && (
                     <View style={styles.loader}>
                         <ActivityIndicator size="large" color="red" />
                     </View>
                 )}
+                {/* <View style={styles.bottomContainer}>
+                    <Text
+                        style={[
+                            styles.bottomLeft,
+                            {
+                                color: dark ? COLORS.white : COLORS.black,
+                            },
+                        ]}
+                    >
+                        Don't have an account ?
+                    </Text>
+                    <TouchableOpacity
+                        onPress={() => navigation.navigate('Signup')}
+                    >
+                        <Text style={styles.bottomRight}>{'  '}Sign Up</Text>
+                    </TouchableOpacity>
+                </View> */}
             </View>
         </SafeAreaView>
     )
@@ -379,10 +460,14 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     bottomContainer: {
-        flexDirection: 'column',
+        flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
         marginVertical: 18,
+        position: 'absolute',
+        bottom: 12,
+        right: 0,
+        left: 0,
     },
     bottomLeft: {
         fontSize: 14,
@@ -395,7 +480,7 @@ const styles = StyleSheet.create({
         color: COLORS.primary,
     },
     button: {
-        marginVertical: 6,
+        marginVertical: 10,
         width: SIZES.width - 32,
         borderRadius: 30,
     },
@@ -408,4 +493,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default Login
+export default LoginPage

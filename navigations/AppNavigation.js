@@ -79,6 +79,7 @@ import { useSelector } from 'react-redux'
 import { retrieveData } from '../helper'
 import SplashScreen from './../components/Splash'
 import useAuthContext from '../hooks/useAuth'
+import LoginPage from '../screens/LoginPage'
 
 const Stack = createNativeStackNavigator()
 
@@ -105,7 +106,7 @@ const AppNavigation = ({ hideSplashScreen, isfontsLoaded }) => {
                     headerShown: false,
                     headerBackVisible: false,
                 }}
-                initialRouteName={initialRouteName}
+                initialRouteName="Login"
             >
                 <>
                     {!isLogin ? (
@@ -132,6 +133,10 @@ const AppNavigation = ({ hideSplashScreen, isfontsLoaded }) => {
                                     component={Welcome}
                                 />
                                 <Stack.Screen name="Login" component={Login} />
+                                <Stack.Screen
+                                    name="LoginPage"
+                                    component={LoginPage}
+                                />
                                 <Stack.Screen
                                     name="Signup"
                                     component={Signup}
