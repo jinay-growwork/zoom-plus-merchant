@@ -49,9 +49,7 @@ const LoginPage = ({ navigation }) => {
     //     //     '723432648509-hq2oh8eghobdervn0cqj999iq4edfi9e.apps.googleusercontent.com',
     // })
     const [loading, setLoading] = useState(false)
-    console.info('----------------------------')
-    console.info('loading =>', loading)
-    console.info('----------------------------')
+
     const [mobile, setMobile] = useState()
     const [mobileError, setMobileError] = useState('')
     const auth = useSelector((state) => state.auth)
@@ -85,7 +83,7 @@ const LoginPage = ({ navigation }) => {
             dispatch({
                 type: actions.SET_NUMBER,
                 payload: {
-                    mobileNumber: `${selectedArea.callingCode}${mobile}`,
+                    mobileNumber: `+91${mobile}`,
                     navigation: navigation,
                 },
             })

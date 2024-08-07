@@ -26,7 +26,7 @@ const OTPVerification = ({ navigation }) => {
     const handleverifyotp = () => {
         dispatch({
             type: actions.VERIFY_OTP,
-            payload: { id: auth?.user?.id, otp: value },
+            payload: { id: auth?.users?.id, otp: value, navigation: navigation },
         })
     }
 

@@ -15,9 +15,9 @@ export default function GoogleLogin({ navigation, loading, setLoading }) {
     GoogleSignin.configure({
         scopes: ['email', 'openid', 'profile'],
         webClientId:
-            '723432648509-2tav0udni7ccnd5c4uinnkcbd1hd1oni.apps.googleusercontent.com',
+            '486238037756-59bjt6tiks8jli9jjd70r6sjf9belqoo.apps.googleusercontent.com',
         iosClientId:
-            '723432648509-1k5p7ofjid3g3jfdua2rdkruti8m1nt8.apps.googleusercontent.com',
+            '486238037756-4p5h7v4qt1j6ju1b29gef7taa23t1t26.apps.googleusercontent.com',
     })
     const [user, setUser] = useState()
 

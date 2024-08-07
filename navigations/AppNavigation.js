@@ -80,6 +80,12 @@ import { retrieveData } from '../helper'
 import SplashScreen from './../components/Splash'
 import useAuthContext from '../hooks/useAuth'
 import LoginPage from '../screens/LoginPage'
+import MenuCategories from '../screens/MenuCategories'
+import RestaurantList from '../screens/RestaurantList'
+import MenuSubCategories from '../screens/MenuSubCategories'
+import SubCategoriesList from '../screens/SubCategoriesList'
+import AddMenuItem from '../screens/AddMenuItem'
+import AddMenuItemInfo from '../screens/AddMenuItemInfo'
 
 const Stack = createNativeStackNavigator()
 
@@ -96,9 +102,7 @@ const AppNavigation = ({ hideSplashScreen, isfontsLoaded }) => {
             hideSplashScreen()
         }
     }, [isLogin, isAppReady, isFirstLaunch])
-    console.info('----------------------------')
-    console.info('initialRouteName =>', initialRouteName)
-    console.info('----------------------------')
+
     return (
         <NavigationContainer>
             <Stack.Navigator
@@ -145,6 +149,7 @@ const AppNavigation = ({ hideSplashScreen, isfontsLoaded }) => {
                                     name="OTPVerification"
                                     component={OTPVerification}
                                 />
+
                                 <Stack.Screen
                                     name="ForgotPasswordMethods"
                                     component={ForgotPasswordMethods}
@@ -160,6 +165,10 @@ const AppNavigation = ({ hideSplashScreen, isfontsLoaded }) => {
                                 <Stack.Screen
                                     name="FillYourProfile"
                                     component={FillYourProfile}
+                                />
+                                <Stack.Screen
+                                    name="RestaurantList"
+                                    component={RestaurantList}
                                 />
                             </Stack.Group>
                         </>
@@ -183,14 +192,37 @@ const AppNavigation = ({ hideSplashScreen, isfontsLoaded }) => {
                             name="FillYourProfile"
                             component={FillYourProfile}
                         /> */}
+
                             <Stack.Group>
                                 <Stack.Screen
                                     name="Main"
                                     component={BottomTabNavigation}
                                 />
+
                                 <Stack.Screen
                                     name="EditProfile"
                                     component={EditProfile}
+                                />
+
+                                <Stack.Screen
+                                    name="AddCategory"
+                                    component={MenuCategories}
+                                />
+                                <Stack.Screen
+                                    name="AddSubCategory"
+                                    component={MenuSubCategories}
+                                />
+                                <Stack.Screen
+                                    name="SubCategoryList"
+                                    component={SubCategoriesList}
+                                />
+                                <Stack.Screen
+                                    name="AddMenuItem"
+                                    component={AddMenuItem}
+                                />
+                                <Stack.Screen
+                                    name="AddMenuItemInfo"
+                                    component={AddMenuItemInfo}
                                 />
                                 <Stack.Screen
                                     name="SettingsNotifications"
@@ -350,6 +382,7 @@ const AppNavigation = ({ hideSplashScreen, isfontsLoaded }) => {
                                     name="CheckoutOrders"
                                     component={CheckoutOrders}
                                 />
+
                                 <Stack.Screen
                                     name="CheckoutOrdersAddress"
                                     component={CheckoutOrdersAddress}

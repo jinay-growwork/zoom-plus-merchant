@@ -23,11 +23,18 @@ apiCall.interceptors.request.use(
         try {
             const idToken = await AsyncStorage.getItem('idToken')
             const token = await AsyncStorage.getItem('token')
-            if (token || idToken)
+            const verifyotptoken = await AsyncStorage.getItem('verifyotptoken')
+            if (token) {
                 req.headers = {
                     ...req.headers,
                     Authorization: `Bearer ${token ?? idToken}`,
                 }
+            } else if (verifyotptoken) {
+                req.headers = {
+                    ...req.headers,
+                    Authorization: `Bearer ${verifyotptoken}`,
+                }
+            }
 
             console.info('----------------------------')
             console.info('req =>', req)

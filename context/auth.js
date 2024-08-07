@@ -9,6 +9,8 @@ export const AuthContext = createContext({})
 
 export const AuthContextProvider = ({ children }) => {
     const [isLogin, setIsLogin] = useState(false)
+    const auth = useSelector((state) => state.auth)
+
     const [isAppReady, setIsAppReady] = useState(false)
     const [isFirstLaunch, setIsFirstLaunch] = useState(null)
     const [token, setToken] = useState('')
@@ -20,9 +22,7 @@ export const AuthContextProvider = ({ children }) => {
         const checkIfFirstLaunch = async () => {
             try {
                 const value = await AsyncStorage.getItem('alreadyLaunched')
-                console.info('----------------------------')
-                console.info('valaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaue =>', value)
-                console.info('----------------------------')
+
                 if (value === null) {
                     await AsyncStorage.setItem('alreadyLaunched', 'true')
                     setIsFirstLaunch(true)
@@ -40,6 +40,7 @@ export const AuthContextProvider = ({ children }) => {
 
     const getToken = async () => {
         const token = await retrieveData('token')
+
         setToken(token)
     }
     useEffect(() => {
@@ -59,21 +60,24 @@ export const AuthContextProvider = ({ children }) => {
     //     // setIsFirstLaunch(is == undefined || is == 'undefined' ? false : true)
     // }
     useEffect(() => {
+        if (auth?.isRegisterRestaurant === true) {
+            setIsLogin(true)
+        }
         if (token?.length > 0) {
             setIsLogin(true)
         } else {
             if (user?.isVerified == true) {
                 if (user?.isRegistered === false) {
                     setIsLogin(false)
-                } else {
-                    setIsLogin(true)
                 }
             } else if (
-                user == null ||
+                token == null ||
                 token == undefined ||
                 token == 'undefined'
             ) {
                 setIsLogin(false)
+            } else {
+                setIsLogin(true)
             }
         }
     }, [user, token])

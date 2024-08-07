@@ -769,6 +769,34 @@ export const menuCategories = [
         onPress: null,
     },
 ]
+
+export const menuItemCategories = [
+    {
+        id: '0',
+        name: 'Veg',
+        icon: icons.veg,
+        iconColor: 'rgba(255, 152, 31, 1)',
+        backgroundColor: 'rgba(255, 152, 31, .12)',
+        onPress: 'CategoryPizza',
+    },
+    {
+        id: '1',
+        name: 'Non-Veg',
+        icon: icons.nonVeg,
+        iconColor: 'rgba(26, 150, 240, 1)',
+        backgroundColor: 'rgba(26, 150, 240,.12)',
+        onPress: null,
+    },
+    {
+        id: '2',
+        name: 'Egg',
+        // icon: icons.nonVeg,
+        iconColor: 'rgba(26, 150, 240, 1)',
+        backgroundColor: 'rgba(26, 150, 240,.12)',
+        onPress: null,
+    },
+]
+
 export const foods = [
     {
         id: '1',

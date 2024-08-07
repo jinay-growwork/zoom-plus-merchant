@@ -49,14 +49,10 @@ const Login = ({ navigation }) => {
     //     //     '723432648509-hq2oh8eghobdervn0cqj999iq4edfi9e.apps.googleusercontent.com',
     // })
     const [loading, setLoading] = useState(false)
-    console.info('----------------------------')
-    console.info('loading =>', loading)
-    console.info('----------------------------')
+
     const [mobile, setMobile] = useState()
     const auth = useSelector((state) => state.auth)
-    console.info('----------------------------')
-    console.info('auth =>', auth)
-    console.info('----------------------------')
+
     const [areas, setAreas] = useState([])
     const [selectedArea, setSelectedArea] = useState(null)
 

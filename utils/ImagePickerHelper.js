@@ -1,5 +1,5 @@
-import { Platform } from 'react-native';
-import * as ImagePicker from 'expo-image-picker';
+import { Platform } from 'react-native'
+import * as ImagePicker from 'expo-image-picker'
 
 export const launchImagePicker = async () => {
     await checkMediaPermissions()
@@ -7,9 +7,13 @@ export const launchImagePicker = async () => {
     const result = await ImagePicker.launchImageLibraryAsync({
         mediaTypes: ImagePicker.MediaTypeOptions.Images,
         allowsEditing: true,
-        aspect: [1, 1],
+        aspect: [4, 3],
         quality: 1,
     })
+
+    console.info('----------------------------')
+    console.info('result =>', result)
+    console.info('----------------------------')
 
     if (!result.canceled) {
         return result.assets[0].uri

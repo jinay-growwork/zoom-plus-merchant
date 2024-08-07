@@ -110,26 +110,26 @@ const AddNewCard = ({ navigation }) => {
   }
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: colors.background }}>
-      <View style={{ flex: 1, margin: 16 }}>
-        <Header title="Add New Card" />
-        {renderPaymentForm()}
-        <View
-          style={{
-            position: 'absolute',
-            bottom: 0,
-            width: SIZES.width - 32
-          }}
-        >
-          <Button
-            filled
-            title="Add New Card"
-            onPress={() => navigation.goBack()}
-            style={styles.addBtn}
-          />
-        </View>
-      </View>
-    </SafeAreaView>
+      <SafeAreaView style={{ flex: 1, backgroundColor: colors.background }}>
+          <View style={{ flex: 1, margin: 16 }}>
+              <Header title="Add New Card" />
+              {renderPaymentForm()}
+              <View
+                  style={{
+                      position: 'absolute',
+                      bottom: 0,
+                      width: SIZES.width - 32,
+                  }}
+              >
+                  <Button
+                      filled
+                      title="Add New Card"
+                      onPress={() => navigation.goBack()}
+                      style={styles.addBtn}
+                  />
+              </View>
+          </View>
+      </SafeAreaView>
   )
 };
 

@@ -10,50 +10,52 @@ import React from 'react'
 import { COLORS, SIZES, icons, images } from '../constants'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useTheme } from '../theme/ThemeProvider'
-import { TabView, SceneMap, TabBar } from 'react-native-tab-view'
-import { ActiveOrders, CancelledOrders, CompletedOrders } from '../tabs'
-
-const renderScene = SceneMap({
-    first: ActiveOrders,
-    second: CompletedOrders,
-    third: CancelledOrders,
-})
+import { SceneMap, TabBar } from 'react-native-tab-view'
+import {
+    ActiveOrders,
+    CancelledOrders,
+    CompletedOrders,
+    NewOrders,
+    InProgressOrders,
+} from '../tabs'
+import TabView from '../components/TabView'
 
 const Orders = ({ navigation }) => {
     const layout = useWindowDimensions()
     const { dark, colors } = useTheme()
 
-    const [index, setIndex] = React.useState(0)
-    const [routes] = React.useState([
-        { key: 'first', title: 'Active' },
-        { key: 'second', title: 'Completed' },
-        { key: 'third', title: 'Cancelled' },
-    ])
+    // const renderScene = SceneMap({
+    //     first:  ()=>NewOrders(),
+    //     second: ()=>InProgressOrders(),
+    //     third: ()=>CompletedOrders(),
+    //     fourth: ()=>CancelledOrders(),
+    //     fifth:()=> CancelledOrders(),
+    // })
 
-    const renderTabBar = (props) => (
-        <TabBar
-            {...props}
-            indicatorStyle={{
-                backgroundColor: COLORS.primary,
-            }}
-            style={{
-                backgroundColor: colors.background,
-            }}
-            renderLabel={({ route, focused }) => (
-                <Text
-                    style={[
-                        {
-                            color: focused ? COLORS.primary : 'gray',
-                            fontSize: 16,
-                            fontFamily: 'semiBold',
-                        },
-                    ]}
-                >
-                    {route.title}
-                </Text>
-            )}
-        />
-    )
+    // const renderTabBar = (props) => (
+    //     <TabBar
+    //         {...props}
+    //         indicatorStyle={{
+    //             backgroundColor: COLORS.primary,
+    //         }}
+    //         style={{
+    //             backgroundColor: colors.background,
+    //         }}
+    //         renderLabel={({ route, focused }) => (
+    //             <Text
+    //                 style={[
+    //                     {
+    //                         color: focused ? COLORS.primary : 'gray',
+    //                         fontSize: 11,
+    //                         fontFamily: 'bold',
+    //                     },
+    //                 ]}
+    //             >
+    //                 {route.title}
+    //             </Text>
+    //         )}
+    //     />
+    // )
     /**
      * Render header
      */
@@ -117,12 +119,16 @@ const Orders = ({ navigation }) => {
             >
                 {renderHeader()}
                 <TabView
+                // routes={routes}
+                />
+                {/* <TabView
+
                     navigationState={{ index, routes }}
                     renderScene={renderScene}
                     onIndexChange={setIndex}
                     initialLayout={{ width: layout.width }}
                     renderTabBar={renderTabBar}
-                />
+                /> */}
             </View>
         </SafeAreaView>
     )

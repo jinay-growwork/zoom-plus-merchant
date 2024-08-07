@@ -26,6 +26,7 @@ const Home = ({ navigation }) => {
     const [currentIndex, setCurrentIndex] = useState(0)
     const { dark, colors } = useTheme()
     const { user } = useSelector((state) => state.auth)
+    console.info('----------------------------')
     const home = useSelector((state) => state.home)
     console.info('----------------------------')
     console.info('home =>', home)
@@ -314,7 +315,7 @@ const Home = ({ navigation }) => {
                         marginVertical: 16,
                     }}
                 >
-                    <FlatList
+                    {/* <FlatList
                         data={home?.merchants}
                         keyExtractor={(item) => item.id}
                         renderItem={({ item }) => {
@@ -336,7 +337,7 @@ const Home = ({ navigation }) => {
                                 />
                             )
                         }}
-                    />
+                    /> */}
                 </View>
             </View>
         )

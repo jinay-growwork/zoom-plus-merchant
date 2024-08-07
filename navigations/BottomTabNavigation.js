@@ -4,6 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { COLORS, FONTS, icons } from '../constants'
 import { useTheme } from '../theme/ThemeProvider'
 import { Home, Inbox, Orders, Profile, Wallet } from '../screens'
+import Menu from '../screens/Menu'
 
 const Tab = createBottomTabNavigator()
 
@@ -113,8 +114,8 @@ const BottomTabNavigation = () => {
             />
 
             <Tab.Screen
-                name="Inbox"
-                component={Inbox}
+                name="Menu"
+                component={Menu}
                 options={{
                     tabBarIcon: ({ focused }) => {
                         return (
@@ -122,8 +123,8 @@ const BottomTabNavigation = () => {
                                 <Image
                                     source={
                                         focused
-                                            ? icons.chatBubble2
-                                            : icons.chatBubble2Outline
+                                            ? icons.document
+                                            : icons.documentOutline
                                     }
                                     resizeMode="contain"
                                     style={{
@@ -146,7 +147,7 @@ const BottomTabNavigation = () => {
                                               : COLORS.gray3,
                                     }}
                                 >
-                                    Inbox
+                                    Menu
                                 </Text>
                             </View>
                         )

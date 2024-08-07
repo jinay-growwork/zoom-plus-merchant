@@ -1,30 +1,24 @@
 import actions from './actions'
 
-const initialState = {
-    verifiedNumber: null,
-    user: null,
-}
+const initialState = {}
 
-export const authReducer = (state = initialState, action) => {
+export const menuReducer = (state = initialState, action) => {
     switch (action.type) {
-        case actions.UPDATE:
-            return {
-                ...state,
-                buttonClicked: true,
-            }
-        case actions.SET_AUTH_STATE:
+        case actions.SET_CATEGORY:
             return {
                 ...state,
                 ...action.payload,
             }
-        case actions.SET_RESTAURANT:
+        case actions.SET_SUB_CATEGORY:
             return {
                 ...state,
                 ...action.payload,
             }
-        case actions.LOG_OUT:
-            return initialState
-
+        case actions.SET_SUB_CATEGORY_BY_ID:
+            return {
+                ...state,
+                ...action.payload,
+            }
         default:
             return state
     }
