@@ -45,7 +45,6 @@ class App extends Component {
                     <ThemeProvider>
                         <SafeAreaProvider>
                             <AppNavigation
-                                
                                 hideSplashScreen={this.hideSplashScreen}
                             />
                         </SafeAreaProvider>
